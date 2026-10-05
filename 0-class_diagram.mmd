@@ -1,0 +1,30 @@
+classDiagram
+direction TB
+    class User {
+	    +str name
+	    -str email
+    }
+
+    class Loan {
+	    +str start_date
+	    +str end_date
+	    +close_loan()
+    }
+
+    class Book {
+	    +str title
+	    +str author
+	    -bool state
+    }
+
+    class Library {
+	    +add_book()
+	    -register_user(name, email)
+	    -create_loan()
+    }
+
+    User "1..*" -- "1..*" Library : borrows/lends
+    Library "1" --* "*" Loan : creates
+    Library "1" --* "*" Book : Has
+    Loan "1" *-- "1" Book : updates state
+    Loan "*" *-- "1" User : references
