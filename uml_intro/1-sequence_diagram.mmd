@@ -1,0 +1,19 @@
+sequenceDiagram
+  actor User
+  participant Library
+  participant Book
+  User->>Library: requests loan
+  Library->>Book: check availability
+  alt if book is available
+    Book-->>Library: is available
+  else else
+    Book-->>Library: not available
+    Library-->>User: loan Rejected
+  end
+  Library->>Book: mark unavailable
+  create participant Loan
+  Book->>Loan: create loan
+  Loan-->>Book: reference book
+  Book-->>Library: assign user
+  Library-->>User: loan created
+
